@@ -64,9 +64,9 @@ def create_db(dbname):
 
 		# CREATE TABLES
 		con, cursor = db_connect(db_config)
-		cursor.execute(f"CREATE TABLE temperature (id_temperature SERIAL PRIMARY KEY, value REAL, date_time TIMESTAMP);"
-		+ f"CREATE TABLE humidity (id_humidity SERIAL PRIMARY KEY, value REAL, date_time TIMESTAMP);"
-		+ f"CREATE TABLE gas (id_gas SERIAL PRIMARY KEY, value REAL, date_time TIMESTAMP);") 
+		cursor.execute(f"CREATE TABLE temperature (id_temperature SERIAL PRIMARY KEY, value REAL, date_time TIMESTAMP DEFAULT Now());"
+		+ f"CREATE TABLE humidity (id_humidity SERIAL PRIMARY KEY, value REAL, date_time TIMESTAMP DEFAULT Now());"
+		+ f"CREATE TABLE gas (id_gas SERIAL PRIMARY KEY, value REAL, date_time TIMESTAMP DEFAULT Now());") 
 					  
 		con.commit()
 		con.close()
