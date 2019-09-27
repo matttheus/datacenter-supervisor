@@ -1,7 +1,1 @@
-{% for temperature in object_list %}
-
-<tr>
-    <td>{{ temperature.temperature }}</td>
-</tr>
-
-{% endfor %}
+{% for temperature in object_list %}{{ temperature.temperature }} {% endfor %}
