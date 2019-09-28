@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import View, ListView
-from .models import Temperature, Humidity, Gas
+from .models import Collection
 
 
 class IndexView(View):
@@ -8,16 +8,11 @@ class IndexView(View):
         return render(request, 'core.html')
 
 
-class TemperatureView(ListView):
-    model = Temperature
-    paginate_by = 10
+class CollectionView(ListView):
+    # model = Collection
+    paginate_by = 17
 
+    def get_queryset(self):
+        queryset = Collection.objects.all().order_by('-date')
 
-class HumidityView(ListView):
-    model = Humidity
-    paginate_by = 10
-
-
-class GasView(ListView):
-    model = Gas
-    paginate_by = 10
+        return queryset

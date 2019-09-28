@@ -16,6 +16,7 @@
                 <th scope="col">Temperature</th>
                 <th scope="col">Humidity</th>
                 <th scope="col">Gas</th>
+                <th scope="col">Date-Time</th>
             </tr>
         </thead>
         <!-- Content from templates -->
@@ -30,52 +31,15 @@
     
     <!-- Ajax -->
     <script>
-        $(document).ready(setInterval(getContent(), 3000));
-        
+        $(document).ready(setInterval(getContent, 3000));
         function getContent(){
-            var res = {'temperature': [], 'humidity': [], 'gas': []};
-            
             $.ajax({
-                url: "temperature",
+                url: "collect",
                 success: function(result){
-                    var tmp_res = result.split(" ");
-                    for (var i = 0; i < tmp_res.length; i++){
-                        if (tmp_res[i] != ""){
-                            res.temperature.push(tmp_res[i]);
-                        }
-                    }
+                    $("tbody").html(result);                    
                 }
             }); 
-
-            $.ajax({
-                url: "humidity",
-                success: function(result){
-                    var tmp_res = result.split(" ");
-                    for (var i = 0; i < tmp_res.length; i++){
-                        if (tmp_res[i] != ""){
-                            res.humidity.push(tmp_res[i]);
-                        }
-                    }
-                }
-            });
-
-            $.ajax({
-                url: "gas",
-                success: function(result){
-                    var tmp_res = result.split(" ");
-                    for (var i = 0; i < tmp_res.length; i++){
-                        if (tmp_res[i] != ""){
-                            res.gas.push(tmp_res[i]);
-                        }
-                    }
-                }
-            });
-
-            for (var i = 0; i < 10; i++) {
-                var tr = document.createElement("tr");
-                tr.innerHtml = "<td>"+res.temperature[i]+"</td><td>"+res.humidity[i]+"</td><td>"+res.gas[i]+"</td>";
-                $("tbody").append(tr);
-            }
+            
         }
     </script>
 </body>

@@ -1,0 +1,9 @@
+{% for collect in object_list %}
+<tr>
+    <td>{{ collect.id }}</td>
+    <td>{{ collect.gas }}</td>
+    <td>{{ collect.temperature }}</td>
+    <td>{{ collect.humidity }}</td>
+    <td>{{ collect.date | date:"d/m/y - H:i:s"}}</td>
+</tr>
+{% endfor %}
