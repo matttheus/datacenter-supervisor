@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Temperature, Gas, Humidity
+from .models import Collection
 
 # Register your models here.
 
-adm_models = [ Temperature, Gas, Humidity ]
-admin.site.register(adm_models)
+admin.site.register(Collection)
