@@ -10,9 +10,9 @@ class IndexView(View):
 
 class CollectionView(ListView):
     # model = Collection
-    paginate_by = 17
+    paginate_by = 14
 
     def get_queryset(self):
-        queryset = Collection.objects.all().order_by('-date')
+        queryset = Collection.objects.all().order_by('-date')[:14]
 
         return queryset
