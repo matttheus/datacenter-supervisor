@@ -33,21 +33,9 @@
         <div class="col-6">
             <div class="container">
                 <canvas id="barChart"></canvas>
-                <div class="row">
-                  <form class="form" method="POST">
-
-                    <select class="select" >
-                      <option value="test">1231</option>
-                    </select>
-                    <button type="submit" class="btn btn-primary" name="button">Enviar</button>
-                  </form>
-                </div>
-            </div>
+          </div>
         </div>
     </div>
-
-
-
 
     <script src="{% static 'bootstrap/js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
@@ -81,7 +69,7 @@
         var myBarChart = new Chart(ctxB, {
         type: 'bar',
         data: {
-            labels: ["Temperature", "Humidity", "Pressure"],
+            labels: ["Temperature", "Humidity", "Gas"],
             datasets: [
             {
                 label: "Average",
