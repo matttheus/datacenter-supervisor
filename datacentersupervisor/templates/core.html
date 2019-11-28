@@ -33,6 +33,15 @@
         <div class="col-6">
             <div class="container">
                 <canvas id="barChart"></canvas>
+                <div class="row">
+                  <form class="form" method="POST">
+
+                    <select class="select" >
+                      <option value="test">1231</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary" name="button">Enviar</button>
+                  </form>
+                </div>
             </div>
         </div>
     </div>
@@ -44,11 +53,11 @@
     <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/mdb.min.js' %}"></script>
-    
+
     <!-- Ajax -->
     <script>
         data_from_db = [0, 0, 0];
-        
+
         var ctxB = document.getElementById("barChart").getContext('2d');
 
         var boderColor_data = [
@@ -100,7 +109,7 @@
                 url: "collect",
                 success: function(result){
                     $("tbody").html(result);
-                    
+
                     var rows = document.getElementsByTagName("tbody")[0].children;
 
                     for (var i = 0; i < rows.length; i++) {
@@ -117,8 +126,8 @@
                     myBarChart.data.datasets[0].data = data_from_db;
                     myBarChart.update();
                 }
-            }); 
-            
+            });
+
         }
     </script>
 </body>
