@@ -2,7 +2,7 @@ import serial
 import psycopg2
 from time import sleep
 from datetime import datetime
-from random import randint
+import threading as th
 
 # Make connection with the database
 def db_connect():
@@ -10,13 +10,18 @@ def db_connect():
 	cursor = con.cursor()
 	return con, cursor
 
-def insert_from_serial(temperature, humidity, gas, date, time_sleep):
+def insert(temperature, humidity, gas, date, time_sleep):
 	sleep(time_sleep)
 	con, cursor = db_connect()
-	cursor.execute(f"INSERT INTO main_collection (temperature, humidity, gas, date) VALUES ({temperature}, {humidity}, {gas}, '{date}');")
+	
+	try:
+		cursor.execute(f"INSERT INTO main_collection (temperature, humidity, gas, date) VALUES ({temperature}, {humidity}, {gas}, '{date}');")
+	except Exception as err:
+		print(f"Ocorreu um problema: {err}")
+
 	con.commit()
 	con.close()
-	print('Insert accomplished!')
+	print(f'Insert accomplished! - {th.currentThread().getName()}')
 
 #---------------------------------------------------------------------
 # Starting server
@@ -26,8 +31,8 @@ print('Server started...')
 
 # Serial code
 se = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
-mq2_sleep_time = 10
-dht11_sleep_time = 20
+mq2_sleep_time = 15
+dht11_sleep_time = 25
 
 while True:
 	# Reading serial
@@ -36,12 +41,12 @@ while True:
 		if data:
 			data_clear = data.decode().split("|")
 			date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-			temperature = 0 # data_clear
-			humidity = 0 # data_clear
-			mq2 = 0 # data_clear
-			dht11_th = Thread(target=insert_from_serial, args=(temperature, humidity, None, dht11_sleep_time, ), name="DHT11-Thread")
+			humidity = data_clear[0] # data_clear
+			temperature = data_clear[1] # data_clear
+			mq2 = data_clear[2] # data_clear
+			dht11_th = th.Thread(target=insert, args=(temperature, humidity, "NULL", date, dht11_sleep_time), name="DHT11")
 			dht11_th.start()
-			mq2_th = Thread(target=insert_from_serial, args=(None, None, mq2, mq2_sleep_time, ), name="MQ2-Thread")
+			mq2_th = th.Thread(target=insert, args=("NULL", "NULL", mq2, date, mq2_sleep_time), name="MQ2")
 			mq2_th.start()
 	except Exception as err:
 		print(f"Ocorreu um problema: {err}")
