@@ -1,0 +1,4 @@
+Fritzing-library-master é um pacote de partes e componentes.
+
+Instruções:
+-Importar o componente DHT11 Humitidy and Temperature Sensor.fzpz
