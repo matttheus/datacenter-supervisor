@@ -58,6 +58,12 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+Run [module](https://github.com/matttheus/DatacenterSupervisor/blob/master/collects.py) which collect the data from arduino. Localized in root project directory. Remember of change the serial settings in this module.
+
+``` 
+python collects.py
+```
+
 Run the server
 
 ``` 
@@ -76,7 +82,7 @@ python manage.py runserver
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/matttheus/DatacenterSupervisor/blob/master/LICENSE) file for details
 
 ## Motivation
 
