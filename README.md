@@ -14,7 +14,7 @@ What things you need to install to run the project
 * [Download Arduino](https://www.arduino.cc/en/Main/Software)
 
 ```
-sudo apt install -y gcc postgresql postgresql-10 pytho3-dev libpq-dev virtualenv
+sudo apt install -y gcc postgresql postgresql-10 python3-dev libpq-dev virtualenv
 
 sudo service postgresql start
 ```
