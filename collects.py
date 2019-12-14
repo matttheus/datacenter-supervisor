@@ -30,7 +30,12 @@ def insert(temperature, humidity, gas, date, time_sleep):
 print('Server started...')
 
 # Serial code
-se = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
+try:
+	se = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
+except Exception as err:
+	print(f"Ocorreu um problema: {err}")
+	exit(1)
+
 mq2_sleep_time = 15
 dht11_sleep_time = 25
 
