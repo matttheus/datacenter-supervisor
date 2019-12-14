@@ -102,9 +102,25 @@
 
                     for (var i = 0; i < rows.length; i++) {
                         var cols = rows[i].children;
-                        data_from_db[0] += parseFloat(cols[1].innerHTML);
-                        data_from_db[1] += parseFloat(cols[2].innerHTML);
-                        data_from_db[2] += parseFloat(cols[3].innerHTML);
+                        
+                        if (isNaN(parseFloat(cols[1].innerHTML))) {
+                            data_from_db[0] += 0;
+                        } else {
+                            data_from_db[0] += parseFloat(cols[1].innerHTML);
+                        }
+
+                        if (isNaN(parseFloat(cols[2].innerHTML))) {
+                            data_from_db[1] += 0;
+                        } else {
+                            data_from_db[1] += parseFloat(cols[2].innerHTML);
+                        }
+
+                        if (isNaN(parseFloat(cols[3].innerHTML))) {
+                            data_from_db[2] += 0;
+                        } else {
+                            data_from_db[2] += parseFloat(cols[3].innerHTML);
+                        }
+                        
                     }
 
                     data_from_db[0] /= rows.length;
